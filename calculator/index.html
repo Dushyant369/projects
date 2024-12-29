@@ -3,55 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> Calculator with Explanation</title>
+    <title>Modern Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="calculator">
-            <div class="display" id="display">0</div>
-            <div class="buttons">
-                <button class="btn" id="clear">C</button>
-                <button class="btn" id="mod">%</button>
-                <button class="btn" id="exp">^</button>
-                <button class="btn operator" id="divide">/</button>
-
-                <button class="btn number">7</button>
-                <button class="btn number">8</button>
-                <button class="btn number">9</button>
-                <button class="btn operator" id="multiply">*</button>
-
-                <button class="btn number">4</button>
-                <button class="btn number">5</button>
-                <button class="btn number">6</button>
-                <button class="btn operator" id="subtract">-</button>
-
-                <button class="btn number">1</button>
-                <button class="btn number">2</button>
-                <button class="btn number">3</button>
-                <button class="btn operator" id="add">+</button>
-
-                <button class="btn number">0</button>
-                <button class="btn" id="decimal">.</button>
-                <button class="btn" id="equals">=</button>
+        <div class="background">
+            <div class="overlay">
+                <h1>Modern Calculator</h1>
+                <div class="calculator">
+                    <input type="text" class="calculator-screen" id="calculator-screen" disabled />
+                    <div class="calculator-buttons">
+                        <button class="btn function-btn" onclick="clearScreen()">C</button>
+                        <button class="btn function-btn" onclick="backspace()">←</button>
+                        <button class="btn operator-btn" onclick="appendCharacter('/')">/</button>
+                        <button class="btn operator-btn" onclick="appendCharacter('*')">*</button>
+                        <button class="btn" onclick="appendCharacter('7')">7</button>
+                        <button class="btn" onclick="appendCharacter('8')">8</button>
+                        <button class="btn" onclick="appendCharacter('9')">9</button>
+                        <button class="btn operator-btn" onclick="appendCharacter('-')">-</button>
+                        <button class="btn" onclick="appendCharacter('4')">4</button>
+                        <button class="btn" onclick="appendCharacter('5')">5</button>
+                        <button class="btn" onclick="appendCharacter('6')">6</button>
+                        <button class="btn operator-btn" onclick="appendCharacter('+')">+</button>
+                        <button class="btn" onclick="appendCharacter('1')">1</button>
+                        <button class="btn" onclick="appendCharacter('2')">2</button>
+                        <button class="btn" onclick="appendCharacter('3')">3</button>
+                        <button class="btn equal-sign" onclick="calculateResult()">=</button>
+                        <button class="btn" onclick="appendCharacter('0')">0</button>
+                        <button class="btn" onclick="appendCharacter('.')">.</button>
+                        <button class="btn function-btn" onclick="appendCharacter('(')">(</button>
+                        <button class="btn function-btn" onclick="appendCharacter(')')">)</button>
+                        <button class="btn function-btn" onclick="appendCharacter('**')">^</button>
+                        <button class="btn function-btn" onclick="appendSquareRoot()">√</button>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <!-- Explanation Section -->
-        <div class="explanation">
-            <h2>Understanding Scientific Notation</h2>
-            <p>When a result is too large or too small, the calculator displays it in scientific notation, like:</p>
-            <pre>1.2346e+8</pre>
-            <p>To convert this back into a regular number:</p>
-            <ul>
-                <li>The number before the "e" is the significant figure (e.g., 1.2346).</li>
-                <li>The "e+8" means multiply the number by 10<sup>8</sup> (i.e., 1.2346 × 10<sup>8</sup> = 123,460,000).</li>
-                <li>The "e-" (negative exponent) would mean dividing by 10 for small numbers.</li>
-            </ul>
-            <p>Example: <pre>3.456e-4</pre> becomes <pre>0.0003456</pre>.</p>
-        </div>
     </div>
-
-    <script src="main.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
