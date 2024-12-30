@@ -1,51 +1,112 @@
-function clearScreen() {
-    document.getElementById('calculator-screen').value = '';
-}
-
-function backspace() {
-    let screen = document.getElementById('calculator-screen');
-    screen.value = screen.value.slice(0, -1);
-}
-
-function appendCharacter(character) {
-    const screen = document.getElementById('calculator-screen');
-    screen.value += character;
-}
-
-function appendSquareRoot() {
-    const screen = document.getElementById('calculator-screen');
-    screen.value += 'Math.sqrt(';
-}
-
-function calculateResult() {
-    let screen = document.getElementById('calculator-screen');
-    try {
-        // Automatically close any open parentheses for square root functions
-        let expression = screen.value.replace(/Math.sqrt\(([^()]*)$/, 'Math.sqrt($1)');
-        screen.value = eval(expression);
-    } catch (error) {
-        screen.value = 'Error';
+// Calculator state and DOM elements
+const state = {
+    screen: null,
+    buttons: null
+  };
+  
+  // Initialize DOM elements
+  function initializeElements() {
+    state.screen = document.getElementById('calculator-screen');
+    state.buttons = document.querySelectorAll('.btn');
+    
+    if (!state.screen || !state.buttons) {
+      console.error('Required elements not found');
+      return false;
     }
-}
-
-// Adding event listeners for keyboard support
-document.addEventListener('keydown', function(event) {
+    return true;
+  }
+  
+  // Calculator operations
+  const operations = {
+    clearScreen: () => {
+      state.screen.value = '';
+    },
+    
+    backspace: () => {
+      state.screen.value = state.screen.value.slice(0, -1);
+    },
+    
+    appendCharacter: (character) => {
+      if (character === '√') {
+        state.screen.value += 'Math.sqrt(';
+      } else {
+        state.screen.value += character;
+      }
+    },
+    
+    calculateResult: () => {
+      try {
+        let expression = state.screen.value.replace(
+          /Math.sqrt\(([^()]*)$/g,
+          'Math.sqrt($1)'
+        );
+        state.screen.value = eval(expression);
+      } catch (error) {
+        state.screen.value = 'Error';
+        console.error('Calculation error:', error);
+      }
+    }
+  };
+  
+  // Event handlers
+  function handleButtonClick(event) {
+    const button = event.target;
+    if (!button.matches('.btn')) return;
+    
+    const value = button.getAttribute('data-value');
+    if (!value) return;
+    
+    switch (value) {
+      case 'C':
+        operations.clearScreen();
+        break;
+      case '←':
+        operations.backspace();
+        break;
+      case '=':
+        operations.calculateResult();
+        break;
+      case '√':
+        operations.appendCharacter('√');
+        break;
+      default:
+        operations.appendCharacter(value);
+        break;
+    }
+  }
+  
+  function handleKeyPress(event) {
     const key = event.key;
-    if (key >= '0' && key <= '9' || key === '.') {
-        appendCharacter(key);
-    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
-        appendCharacter(key);
+    
+    if ((key >= '0' && key <= '9') || key === '.') {
+      operations.appendCharacter(key);
+    } else if (['+', '-', '*', '/'].includes(key)) {
+      operations.appendCharacter(key);
     } else if (key === 'Enter') {
-        calculateResult();
+      operations.calculateResult();
     } else if (key === 'Backspace') {
-        backspace();
+      operations.backspace();
     } else if (key === 'Escape') {
-        clearScreen();
+      operations.clearScreen();
     } else if (key === '^') {
-        appendCharacter('**');
+      operations.appendCharacter('**');
     } else if (key === 'r') {
-        appendSquareRoot();
+      operations.appendCharacter('√');
     } else if (key === '(' || key === ')') {
-        appendCharacter(key);
+      operations.appendCharacter(key);
     }
-});
+  }
+  
+  // Initialize calculator
+  function initCalculator() {
+    if (!initializeElements()) return;
+    
+    // Add click listener to the calculator buttons container (event delegation)
+    document.querySelector('.calculator-buttons').addEventListener('click', handleButtonClick);
+    
+    // Add keyboard listener
+    document.addEventListener('keydown', handleKeyPress);
+  }
+  
+  // Start the calculator when DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', initCalculator);
