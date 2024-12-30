@@ -27,15 +27,58 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Navigation */
+nav {
+  background-color: #1A1A1A;
+  padding: 10px 0;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+}
+
+nav .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav h1 {
+  font-size: 1.5rem;
+  color: #eaeaea;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 15px;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s;
+}
+
+nav ul li a:hover {
+  background-color: #4CAF50;
+}
+
 /* Header */
 header {
   background-color: #1A1A1A;
-  padding: 40px 0;
+  padding: 100px 0 40px 0;
   text-align: center;
   position: relative;
+  margin-top: 50px;
 }
 
-header h1 {
+header h2 {
   font-size: 2.5rem;
   color: #eaeaea;
 }
@@ -76,6 +119,11 @@ header p {
   border-radius: 50%;
   width: 150px;
   margin-bottom: 20px;
+  transition: transform 0.3s;
+}
+
+.profile-pic img:hover {
+  transform: scale(1.1);
 }
 
 /* Skills Section */
@@ -98,6 +146,11 @@ header p {
   flex: 1 1 calc(33% - 40px);
   min-width: 200px;
   text-align: center;
+  transition: transform 0.3s;
+}
+
+.skill:hover {
+  transform: scale(1.05);
 }
 
 /* Projects Section */
@@ -116,11 +169,21 @@ header p {
   background-color: #292929;
   padding: 20px;
   border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.project:hover {
+  transform: scale(1.05);
 }
 
 .project img {
   width: 100%;
   border-radius: 5px;
+  transition: transform 0.3s;
+}
+
+.project img:hover {
+  transform: scale(1.1);
 }
 
 /* Work Section */
@@ -163,6 +226,13 @@ header p {
 
 #contact .social-links a {
   margin: 0 10px;
+  color: #fff;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+#contact .social-links a:hover {
+  color: #4CAF50;
 }
 
 /* Footer */
