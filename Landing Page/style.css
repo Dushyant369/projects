@@ -31,6 +31,7 @@ img {
   background-color: #0f3460;
   padding: 30px 0;
   text-align: center;
+  position: relative;
 }
 
 .header-section nav ul {
@@ -91,16 +92,19 @@ img {
 .intro-content {
   max-width: 60%;
 }
+
 .intro-content h2 {
   text-align: center;
   margin-bottom: 50px;
   color: #ffd700;
 }
+
 .intro-content p {
   font-size: 18px;
   line-height: 1.6;
   margin-bottom: 30px;
 }
+
 .intro-image {
   max-width: 30%;
 }
@@ -109,6 +113,11 @@ img {
   width: 100%;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+}
+
+.intro-image img:hover {
+  transform: scale(1.05);
 }
 
 /* Features Section */
@@ -125,12 +134,14 @@ img {
 
 .features {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   text-align: center;
 }
 
 .feature {
   max-width: 200px;
+  margin-bottom: 20px;
 }
 
 .feature i {
@@ -161,12 +172,24 @@ img {
 
 .steps {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .step {
   max-width: 30%;
   text-align: center;
+  margin-bottom: 20px;
+}
+
+.step img {
+  width: 100%;
+  border-radius: 10px;
+  transition: transform 0.3s;
+}
+
+.step img:hover {
+  transform: scale(1.05);
 }
 
 .step h3 {
@@ -190,7 +213,7 @@ img {
 
 .testimonials {
   display: flex;
-  justify-content :space-around;
+  justify-content: space-around;
   flex-wrap: wrap;
   gap: 30px;
 }
@@ -202,18 +225,18 @@ img {
   max-width: 350px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
   transition: transform 0.3s ease;
-
 }
+
 .testimonial:hover {
   transform: translateY(-10px);
 }
 
 .testimonial img {
   width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-    border: 3px solid #ffca28;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+  border: 3px solid #ffca28;
 }
 
 .testimonial p {
@@ -243,6 +266,7 @@ img {
 
 .pricing-plans {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
@@ -252,6 +276,8 @@ img {
   border-radius: 10px;
   text-align: center;
   transition: transform 0.3s;
+  max-width: 300px;
+  margin-bottom: 20px;
 }
 
 .plan-card:hover {
@@ -321,11 +347,15 @@ img {
   font-size: 18px;
   color: #ffd700;
   cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .faq p {
   display: none;
   color: #d1d1d1;
+  padding: 10px 0;
 }
 
 /* Footer Section */
@@ -353,4 +383,32 @@ img {
 
 .social-icons a:hover i {
   color: #ffa500;
+}
+
+@media (max-width: 768px) {
+  .header-section nav ul {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .introduction-section {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .intro-content, .intro-image {
+    max-width: 100%;
+  }
+
+  .features {
+    flex-direction: column;
+  }
+
+  .steps {
+    flex-direction: column;
+  }
+
+  .pricing-plans {
+    flex-direction: column;
+  }
 }
